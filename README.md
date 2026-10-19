@@ -26,6 +26,8 @@ neovirtual-devsecops/
 
 Detalle completo en [docs/auditoria-trazabilidad.md](docs/auditoria-trazabilidad.md).
 
+**¿Vas a dictar la clase y no participaste en la construcción?** Empieza por [docs/guia-del-docente.md](docs/guia-del-docente.md): explica el caso, cada falla y cada etapa del pipeline, trae una agenda de 2 horas, un ensayo previo y la solución a los problemas frecuentes.
+
 **Para dictar la clase:** abre [docs/clase-interactiva.html](docs/clase-interactiva.html) en el navegador (no necesita servidor). Incluye los hallazgos, la preparación del entorno con pasos marcables, un simulador de ataques contra ambas versiones, un simulador que rompe el pipeline a propósito, la evidencia de auditoría y un cuestionario. Tiene modo proyección y navega con las flechas ← →.
 
 ## Las dos aplicaciones
