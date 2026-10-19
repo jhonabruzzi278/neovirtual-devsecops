@@ -26,6 +26,8 @@ neovirtual-devsecops/
 
 Detalle completo en [docs/auditoria-trazabilidad.md](docs/auditoria-trazabilidad.md).
 
+**Para dictar la clase:** abre [docs/clase-interactiva.html](docs/clase-interactiva.html) en el navegador (no necesita servidor). Incluye los hallazgos, la preparación del entorno con pasos marcables, un simulador de ataques contra ambas versiones, un simulador que rompe el pipeline a propósito, la evidencia de auditoría y un cuestionario. Tiene modo proyección y navega con las flechas ← →.
+
 ## Las dos aplicaciones
 
 **`taskmanager-sin-devsecops`** (puerto 5001) – el código original vulnerable más un entorno típico de "así lo hacíamos":
