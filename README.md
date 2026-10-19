@@ -76,11 +76,11 @@ Abre http://localhost:8080, pega la clave e instala los plugins sugeridos.
 
 > Si ya tienes otro Jenkins, necesita el CLI de Docker (paquete `docker-cli`; en Debian 13 el paquete `docker.io` no lo trae) y el socket montado. Compruébalo con `docker exec jenkins docker --version`.
 
-Jenkins clona desde una URL y no ve tu carpeta local, así que primero inicializa el repo y súbelo a tu propio remoto (GitHub, GitLab…):
+Jenkins clona desde una URL y no ve tu carpeta local, así que primero inicializa el repo y súbelo al repositorio del laboratorio:
 
 ```bash
 git init -b main && git add -A && git commit -m "Proyecto inicial"
-git remote add origin <URL-DE-TU-REPOSITORIO>
+git remote add origin https://github.com/yasserguerrat-hub/neovirtual-devsecops.git
 git push -u origin main
 ```
 

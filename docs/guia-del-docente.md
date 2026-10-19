@@ -37,7 +37,7 @@ neovirtual-devsecops/
 └── README.md
 ```
 
-El proyecto se entrega sin historial de Git. Inicialízalo (`git init -b main`, `git add -A`, `git commit`) y súbelo a tu propio remoto antes de crear los jobs.
+El proyecto se entrega sin historial de Git. Inicialízalo (`git init -b main`, `git add -A`, `git commit`) y súbelo a https://github.com/yasserguerrat-hub/neovirtual-devsecops.git antes de crear los jobs.
 
 ## 3. Requisitos
 
@@ -45,7 +45,7 @@ El proyecto se entrega sin historial de Git. Inicialízalo (`git init -b main`, 
 |---|---|
 | Docker (Desktop en Windows/Mac) | Todo corre en contenedores; no hace falta Python en tu equipo |
 | Jenkins en un contenedor llamado **`jenkins`** con el socket de Docker montado | Ejecutar los dos pipelines |
-| Un repositorio Git remoto propio (GitHub, GitLab…) | Jenkins corre en un contenedor y clona desde una URL; no ve tu carpeta local |
+| Acceso de escritura a `https://github.com/yasserguerrat-hub/neovirtual-devsecops.git` | Jenkins corre en un contenedor y clona desde esa URL; no ve tu carpeta local |
 | Navegador | Abrir `docs/clase-interactiva.html` |
 
 El nombre `jenkins` del contenedor es obligatorio: el pipeline seguro usa `--volumes-from jenkins` para que las herramientas vean el código. Si tu contenedor se llama distinto, cambia `JENKINS_CONTAINER` en `apps/taskmanager-con-devsecops/Jenkinsfile`.
