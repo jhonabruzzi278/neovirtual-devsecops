@@ -130,10 +130,10 @@ Archivo: `apps/taskmanager-con-devsecops/Jenkinsfile`. Las herramientas corren e
 | Min | Bloque | Material |
 |---|---|---|
 | 0–10 | Caso y hallazgos de la auditoría | Página interactiva, secciones *Inicio* y *Escenario* |
-| 10–25 | Levantar las dos apps (los estudiantes lo hacen) | Sección *Entorno*; `docker compose up -d --build` |
+| 10–25 | Preparar el laboratorio (los estudiantes lo hacen) | Sección *Laboratorio*, pasos 1 a 3 |
 | 25–50 | Ataques contra la versión vulnerable, luego contra la segura | Simulador de la página para explicar; después `docs/demo-ataques.md` contra las apps reales |
 | 50–55 | Pausa | |
-| 55–75 | Crear los dos jobs y ejecutarlos | Sección *Jenkins*. Mientras corre el seguro, explica cada etapa con la tabla de la sección 5 |
+| 55–75 | Credenciales, jobs y ejecución | Sección *Laboratorio*, pasos 4 a 8. Mientras corre el seguro, explica cada etapa con la tabla de la sección 5 |
 | 75–95 | Romper el pipeline a propósito | Simulador *Pipeline* y luego, en vivo, el cambio de Flask a 2.0.1 |
 | 95–110 | Evidencia para el auditor | Artefactos archivados del build; sección *Evidencia* |
 | 110–120 | Cierre | Cuestionario de la página |

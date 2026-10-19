@@ -237,16 +237,7 @@ h3 { font-size: 1.1rem; font-weight: 700; font-stretch: 112%; }
 
 footer { padding-top: 2rem; border-top: 1px solid var(--line); color: var(--ink-2); font-size: 0.85rem; }
 
-/* ---------- Guía del docente (se oculta en modo proyección) ---------- */
-html.proj #docente { display: none; }
-.teacher-note { display: inline-flex; gap: 0.5rem; align-items: center; font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; border: 1px dashed var(--warn); color: var(--warn); border-radius: 3px; padding: 0.2rem 0.55rem; margin-bottom: 1rem; }
-.doc { padding: 1.4rem 1.5rem; display: grid; gap: 1.1rem; min-width: 0; }
-.doc > * { min-width: 0; }
-.doc h3 { font-size: 1.15rem; }
-.doc p, .doc li { max-width: 48rem; }
-.doc ul, .doc ol { margin: 0; padding-left: 1.2rem; display: grid; gap: 0.35rem; }
-.doc .cmp { max-width: none; }
-.doc .cmp th:first-child, .doc .cmp td:first-child { padding-left: 0; }
+/* ---------- Preguntas y etiquetas ---------- */
 .filter { font-family: var(--font-mono); font-size: 0.88rem; padding: 0.5rem 0.7rem; border: 1px solid var(--line); border-radius: 4px; background: var(--paper); color: var(--ink); width: min(100%, 24rem); }
 details.faq { border-top: 1px solid var(--line); padding: 0.7rem 0; }
 details.faq:last-child { border-bottom: 1px solid var(--line); }
@@ -256,6 +247,40 @@ details.faq p { color: var(--ink-2); margin-top: 0.5rem; font-size: 0.95rem; }
 .pill.y { border-color: var(--pass); color: var(--pass); }
 .pill.n { border-color: var(--warn); color: var(--warn); }
 
+/* ---------- Guía paso a paso ---------- */
+.needs { padding: 1.1rem 1.4rem; margin-bottom: 1rem; }
+.needs h3 { margin-bottom: 0.5rem; }
+.needs ul { margin: 0; padding-left: 1.2rem; display: grid; gap: 0.25rem; }
+.settings { padding: 1rem 1.4rem; margin-bottom: 1.5rem; display: grid; gap: 0.8rem; }
+.set-row { display: grid; grid-template-columns: minmax(8rem, 11rem) minmax(0, 1fr); gap: 0.5rem 1rem; align-items: center; }
+.set-lab { font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.07em; color: var(--ink-2); }
+.seg { display: inline-flex; flex-wrap: wrap; border: 1px solid var(--ink); border-radius: 4px; overflow: hidden; width: fit-content; max-width: 100%; }
+.seg button { border: 0; background: transparent; padding: 0.45rem 0.8rem; font-size: 0.85rem; font-weight: 500; }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.small { font-size: 0.85rem; color: var(--ink-2); max-width: 46rem; }
+.stepcard { border: 1px solid var(--line); border-radius: 6px; background: var(--panel); padding: 1.3rem 1.4rem 1.4rem; margin-bottom: 1.1rem; display: grid; gap: 0.95rem; min-width: 0; }
+.stepcard > * { min-width: 0; }
+.stepcard.checked { border-color: var(--pass); }
+.sc-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.4rem 0.9rem; }
+.sc-head h3 { font-size: 1.25rem; flex: 1 1 14rem; }
+.num { font-family: var(--font-mono); font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--signal); }
+.doneLab { display: inline-flex; align-items: center; gap: 0.45rem; font-family: var(--font-mono); font-size: 0.78rem; color: var(--ink-2); cursor: pointer; margin-left: auto; }
+.doneLab input { accent-color: var(--pass); width: 1.1rem; height: 1.1rem; margin: 0; cursor: pointer; }
+.stepcard.checked .doneLab { color: var(--pass); }
+.why { color: var(--ink-2); max-width: 48rem; }
+.why b { color: var(--ink); }
+.stepcard p { max-width: 48rem; }
+.sc-steps { margin: 0; padding-left: 1.4rem; display: grid; gap: 0.9rem; max-width: 52rem; }
+.sc-steps li { padding-left: 0.2rem; min-width: 0; }
+.sc-steps li::marker { font-family: var(--font-mono); color: var(--ink-2); }
+.sc-steps .code { margin-top: 0.5rem; }
+.sc-steps .small { margin-top: 0.4rem; }
+.note { border-left: 3px solid var(--pass); padding: 0.55rem 0.9rem; font-size: 0.93rem; background: color-mix(in srgb, var(--pass) 8%, transparent); border-radius: 0 4px 4px 0; max-width: 52rem; }
+.note.warn { border-left-color: var(--warn); background: color-mix(in srgb, var(--warn) 9%, transparent); }
+.note b:first-child { color: var(--ink); }
+.sub { margin: 2.2rem 0 0.9rem; font-size: 1.15rem; }
+.filter { font-family: var(--font-mono); font-size: 0.88rem; padding: 0.5rem 0.7rem; border: 1px solid var(--line); border-radius: 4px; background: var(--paper); color: var(--ink); width: min(100%, 28rem); }
+@media (max-width: 40rem) { .set-row { grid-template-columns: minmax(0, 1fr); } }
 /* ---------- Responsive ---------- */
 @media (max-width: 62rem) {
   .shell { grid-template-columns: minmax(0, 1fr); }
@@ -302,7 +327,7 @@ details.faq p { color: var(--ink-2); margin-top: 0.5rem; font-size: 0.95rem; }
     <section class="hero" id="inicio" data-label="Inicio">
       <div class="eyebrow"><b>NeoVirtual</b> · auditoría interna de desarrollo</div>
       <h1>Dos pipelines, una misma app</h1>
-      <p class="lede">Despliega el gestor de tareas sin controles y luego con ellos. Ataca las dos versiones, rompe el pipeline a propósito y revisa qué evidencia queda para el auditor.</p>
+      <p class="lede">Despliega el gestor de tareas sin controles y luego con ellos. Ataca las dos versiones, rompe el pipeline a propósito y revisa qué evidencia queda para el auditor. Sigue las secciones en orden: tu avance se guarda en este navegador.</p>
 
       <div class="strips" aria-label="Compuertas de seguridad por pipeline">
         <div class="strip sin"><span class="lab">Sin DevSecOps</span><div class="cells" id="stripSin"></div></div>
@@ -332,13 +357,25 @@ details.faq p { color: var(--ink-2); margin-top: 0.5rem; font-size: 0.95rem; }
       <div class="cols2" id="findPanel" role="tabpanel" aria-live="polite"></div>
     </section>
 
-    <!-- ================= 2 · Entorno ================= -->
-    <section id="entorno" data-label="Entorno">
-      <div class="eyebrow"><b>Compuerta 2</b> · preparar el laboratorio</div>
-      <h2>Levanta las dos apps</h2>
-      <p class="lede">Necesitas Docker. Marca cada paso cuando funcione; el avance queda guardado en tu navegador.</p>
-      <ol class="steps" id="stepsEnv"></ol>
+    <!-- ================= 2 · Laboratorio ================= -->
+    <section id="lab" data-label="Laboratorio">
+      <div class="eyebrow"><b>Compuerta 2</b> · prepara tu entorno</div>
+      <h2>Monta el laboratorio paso a paso</h2>
+      <p class="lede">Sigue los pasos en orden. Marca cada uno como hecho cuando veas lo que dice «Qué deberías ver»; tu avance se guarda en este navegador.</p>
+      <div class="block needs">
+        <h3>Antes de empezar necesitas</h3>
+        <ul>
+          <li><b>Docker Desktop</b> instalado y encendido.</li>
+          <li><b>Git</b> instalado.</li>
+          <li>Una <b>cuenta de GitHub</b> (gratis).</li>
+          <li>El <b>zip del proyecto</b> que te entregó el docente.</li>
+          <li>Unos 10 GB libres y conexión a internet (se descargan imágenes grandes).</li>
+        </ul>
+      </div>
+      <div class="block settings" id="settings"></div>
+      <div id="stepsLab"></div>
     </section>
+
 
     <!-- ================= 3 · Ataques ================= -->
     <section id="ataques" data-label="Ataques">
@@ -355,7 +392,9 @@ details.faq p { color: var(--ink-2); margin-top: 0.5rem; font-size: 0.95rem; }
         </div>
         <div class="block console" id="console" aria-live="polite"></div>
       </div>
-      <p class="callout"><b>Simulación didáctica.</b> Funciona sin red ni contenedores para proyectarla en clase. Para repetir cada ataque contra las apps reales, usa los pasos de <code>docs/demo-ataques.md</code>.</p>
+      <p class="callout"><b>Simulación didáctica.</b> Funciona sin red ni contenedores: úsala para entender cada ataque antes de repetirlo contra las apps reales, justo debajo.</p>
+      <h3 class="sub">Hazlo con las apps reales</h3>
+      <div id="stepAttack"></div>
     </section>
 
     <!-- ================= 4 · Pipeline ================= -->
@@ -363,6 +402,8 @@ details.faq p { color: var(--ink-2); margin-top: 0.5rem; font-size: 0.95rem; }
       <div class="eyebrow"><b>Compuerta 4</b> · integración continua</div>
       <h2>Rompe el pipeline a propósito</h2>
       <p class="lede">Introduce un cambio inseguro y ejecuta el mismo cambio en los dos pipelines. Uno lo despliega; el otro lo detiene antes de producción.</p>
+      <div id="stepBreak"></div>
+      <h3 class="sub">Practica con el simulador</h3>
       <div class="pipe-ctl">
         <fieldset id="pipeSel"><legend>Pipeline</legend></fieldset>
         <fieldset id="scenSel"><legend>Cambio introducido</legend></fieldset>
@@ -372,17 +413,9 @@ details.faq p { color: var(--ink-2); margin-top: 0.5rem; font-size: 0.95rem; }
       <div class="result" id="result"></div>
     </section>
 
-    <!-- ================= 5 · Jenkins ================= -->
-    <section id="jenkins" data-label="Jenkins">
-      <div class="eyebrow"><b>Compuerta 5</b> · automatizar</div>
-      <h2>Crea los dos jobs en Jenkins</h2>
-      <p class="lede">Jenkins corre en <code>http://localhost:8080</code> con el Docker del equipo montado. Las herramientas de seguridad se ejecutan en contenedores de versión fija, así que no hay nada más que instalar en Jenkins.</p>
-      <ol class="steps" id="stepsJenkins"></ol>
-    </section>
-
     <!-- ================= 6 · Evidencia ================= -->
     <section id="evidencia" data-label="Evidencia">
-      <div class="eyebrow"><b>Compuerta 6</b> · auditoría</div>
+      <div class="eyebrow"><b>Compuerta 5</b> · auditoría</div>
       <h2>¿Qué le entregas al auditor?</h2>
       <p class="lede">Cada build del pipeline seguro archiva sus reportes. Filtra por etapa para ver qué prueba cada archivo.</p>
       <div class="tabs" role="tablist" id="evTabs" aria-label="Filtro de evidencia"></div>
@@ -397,20 +430,28 @@ details.faq p { color: var(--ink-2); margin-top: 0.5rem; font-size: 0.95rem; }
 
     <!-- ================= 7 · Cierre ================= -->
     <section id="cierre" data-label="Cierre">
-      <div class="eyebrow"><b>Compuerta 7</b> · verificación</div>
+      <div class="eyebrow"><b>Compuerta 6</b> · verificación</div>
       <h2>Comprueba lo aprendido</h2>
       <p class="lede">Seis preguntas. Cada respuesta explica el porqué.</p>
       <div class="block q" id="quiz"></div>
+      <h3 class="sub">Cuando termines</h3>
+      <div id="stepClean"></div>
       <footer>Laboratorio educativo: la app «sin DevSecOps» es vulnerable a propósito; no la expongas fuera de un entorno aislado.</footer>
     </section>
 
-    <!-- ================= 8 · Guía del docente ================= -->
-    <section id="docente" data-label="Guía docente">
-      <div class="eyebrow"><b>Solo docente</b> · no se muestra en modo proyección</div>
-      <h2>Guía del docente</h2>
-      <p class="lede">Todo lo necesario para dictar el laboratorio sin haber participado en su construcción. Haz primero el ensayo previo.</p>
-      <div class="tabs" role="tablist" id="docTabs" aria-label="Secciones de la guía"></div>
-      <div class="block doc" id="docPanel" role="tabpanel" aria-live="polite"></div>
+    <!-- ================= 7 · Ayuda ================= -->
+    <section id="ayuda" data-label="Ayuda">
+      <div class="eyebrow"><b>Compuerta 7</b> · si algo falla</div>
+      <h2>Problemas frecuentes</h2>
+      <p class="lede">Escribe una palabra del error (puerto, credenciales, MFA, Trivy…) para filtrar la lista.</p>
+      <input class="filter" id="probFilter" type="search" placeholder="Filtrar por palabra" aria-label="Filtrar problemas">
+      <div class="scroll-x block" style="margin-top:1rem">
+        <table class="cmp" style="max-width:none;margin:0">
+          <thead><tr><th style="padding-left:1rem">Síntoma</th><th>Qué hacer</th></tr></thead>
+          <tbody id="probBody"></tbody>
+        </table>
+      </div>
+      <p class="callout"><b>Un build falla y no sabes por qué.</b> Abre <b>Console Output</b> del build en Jenkins. La última etapa en rojo indica qué compuerta lo detuvo, y el mensaje justo encima explica el motivo. Copia ese mensaje cuando pidas ayuda.</p>
     </section>
   </main>
 </div>
@@ -468,7 +509,7 @@ details.faq p { color: var(--ink-2); margin-top: 0.5rem; font-size: 0.95rem; }
   document.addEventListener("keydown", function (e) {
     var t = e.target.tagName;
     if (t === "INPUT" || t === "TEXTAREA" || t === "SELECT" || e.metaKey || e.ctrlKey || e.altKey) return;
-    var lastNav = sections.length - 1 - (root.classList.contains("proj") ? 1 : 0);
+    var lastNav = sections.length - 1;
     if (e.key === "ArrowRight" || e.key === "PageDown") { var n = Math.min(lastNav, currentIndex() + 1); sections[n].scrollIntoView(); e.preventDefault(); }
     if (e.key === "ArrowLeft" || e.key === "PageUp") { var p = Math.max(0, currentIndex() - 1); sections[p].scrollIntoView(); e.preventDefault(); }
   });
@@ -515,70 +556,263 @@ details.faq p { color: var(--ink-2); margin-top: 0.5rem; font-size: 0.95rem; }
   });
   showFinding("pruebas");
 
-  /* ---------- listas de pasos con copia y persistencia ---------- */
-  var steps = {
-    env: [
-      { t: "Inicializa el repositorio", d: "Descomprime el zip, entra a la carpeta y crea el repositorio Git desde cero.", c: "cd neovirtual-devsecops\ngit init -b main\ngit add -A\ngit commit -m \"Proyecto inicial\"" },
-      { t: "Crea tu archivo de credenciales", d: "Los valores de la app segura nunca van en el código. El archivo .env está ignorado por Git.", c: "cp .env.example .env\n# edita SECRET_KEY, ADMIN_PW y USER_PW" },
-      { t: "Levanta ambas apps", d: "Construye las imágenes y arranca los contenedores. La vulnerable queda en :5001 y la segura en :5002.", c: "docker compose up -d --build\ndocker compose ps" },
-      { t: "Obtén el secreto MFA de la app segura", d: "Se imprime una vez al crear la base de datos. Cárgalo en una app TOTP como Google Authenticator.", c: "docker logs taskmanager-secure | grep MFA" },
-      { t: "Ejecuta las 29 pruebas de seguridad", d: "Mismo comando que corre el pipeline, dentro de un contenedor para no instalar Python.", c: "docker run --rm -v \"$PWD/apps/taskmanager-con-devsecops:/app\" -w /app python:3.12-slim \\\n  sh -c \"pip install -q -r requirements-dev.txt && pytest --cov=app --cov-fail-under=80\"" }
-    ],
-    jenkins: [
-      { t: "Levanta Jenkins", d: "El repositorio incluye un Jenkins con el CLI de Docker y el socket del equipo. Abre http://localhost:8080, pega la clave inicial e instala los plugins sugeridos.", c: "docker compose -f infra/docker-compose.jenkins.yml up -d --build\ndocker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword" },
-      { t: "Crea tres credenciales Secret text", d: "Manage Jenkins → Credentials → Global. Los IDs deben ser exactos.", c: "taskmanager-secret-key   # openssl rand -hex 32\ntaskmanager-admin-pw\ntaskmanager-user-pw" },
-      { t: "Sube el repositorio a GitHub", d: "Jenkins corre en un contenedor y no ve tu carpeta local, así que clona desde GitHub. Sube el proyecto al repositorio del laboratorio.", c: "git remote add origin https://github.com/yasserguerrat-hub/neovirtual-devsecops.git\ngit push -u origin main" },
-      { t: "Crea el job sin DevSecOps", d: "New Item → Pipeline → Pipeline script from SCM → Git, rama */main. Si el repositorio es privado, agrega credenciales de acceso en el job.", c: "Repository URL: https://github.com/yasserguerrat-hub/neovirtual-devsecops.git\nScript Path:    apps/taskmanager-sin-devsecops/Jenkinsfile" },
-      { t: "Crea el job con DevSecOps", d: "Mismo repositorio; solo cambia la ruta del Jenkinsfile.", c: "Script Path:    apps/taskmanager-con-devsecops/Jenkinsfile" },
-      { t: "Ejecuta ambos con Build Now y compara", d: "El primero termina verde en un minuto. El segundo recorre diez etapas; revisa los artefactos archivados del build." },
-      { t: "Reintroduce una vulnerabilidad en el job seguro", d: "Por ejemplo baja Flask a 2.0.1 en requirements.txt, haz push y ejecuta de nuevo. Debe fallar en SCA antes de llegar a Deploy.", c: "sed -i 's/^Flask==.*/Flask==2.0.1/' apps/taskmanager-con-devsecops/requirements.txt\ngit commit -am \"test: forzar fallo de SCA\" && git push" }
-    ]
+  /* ---------- guía paso a paso: preferencias, copia y progreso ---------- */
+  var REPO_PLACEHOLDER = "https://github.com/TU-USUARIO/neovirtual-devsecops.git";
+  var isWin = !/Mac|Linux|iPhone|iPad|Android/i.test(navigator.userAgent || "");
+  var prefs = store.get("nv-prefs", { os: isWin ? "win" : "mac", repo: "" });
+  var checked = store.get("nv-steps", {});
+
+  var sub = function (s, forHtml) {
+    var r = prefs.repo.trim() || REPO_PLACEHOLDER;
+    return String(s).split("{{REPO}}").join(forHtml ? esc(r) : r);
   };
-  var allChecks = [];
-  function renderSteps(key, ol) {
-    var saved = store.get("nv-steps-" + key, {});
-    steps[key].forEach(function (s, i) {
-      var id = "chk-" + key + "-" + i;
-      var li = document.createElement("li");
-      li.className = "step";
-      li.innerHTML = '<input type="checkbox" id="' + id + '">' +
-        "<div><label for=\"" + id + "\">" + esc(s.t) + '</label><p class="d">' + esc(s.d) + "</p>" +
-        (s.c ? '<div class="code"><pre><code>' + esc(s.c) + '</code></pre><button type="button" data-copy>Copiar</button></div>' : "") + "</div>";
-      var cb = $("input", li);
-      cb.checked = !!saved[i]; li.classList.toggle("checked", cb.checked);
+  var pick = function (x) { return x !== null && typeof x === "object" && ("win" in x || "mac" in x) ? (prefs.os === "win" ? x.win : (x.mac !== undefined ? x.mac : x.win)) : x; };
+  var T = function (win, mac) { return { win: win, mac: mac }; };
+
+  var codeBox = function (c) {
+    var text = sub(pick(c), false);
+    return '<div class="code"><pre><code>' + esc(text) + '</code></pre><button type="button" data-copy>Copiar</button></div>';
+  };
+  var tbl = function (head, rows) {
+    return '<div class="scroll-x"><table class="cmp"><thead><tr>' + head.map(function (h) { return "<th>" + h + "</th>"; }).join("") +
+      "</tr></thead><tbody>" + rows.map(function (r) { return "<tr>" + r.map(function (c) { return "<td>" + c + "</td>"; }).join("") + "</tr>"; }).join("") + "</tbody></table></div>";
+  };
+  var html = function (x) { return sub(pick(x), true); };
+
+  function blockHtml(b) {
+    if (b.p) return "<p>" + html(b.p) + "</p>";
+    if (b.code) return codeBox(b.code);
+    if (b.table) return tbl(b.table[0], b.table[1]);
+    if (b.see) return '<div class="note see"><b>Qué deberías ver.</b> ' + html(b.see) + "</div>";
+    if (b.warn) return '<div class="note warn"><b>' + (b.title || "Si falla.") + "</b> " + html(b.warn) + "</div>";
+    if (b.steps) {
+      return '<ol class="sc-steps">' + b.steps.map(function (s) {
+        return "<li><div>" + html(s.h) + "</div>" + (s.code ? codeBox(s.code) : "") + (s.note ? '<p class="small">' + html(s.note) + "</p>" : "") + "</li>";
+      }).join("") + "</ol>";
+    }
+    return "";
+  }
+
+  var cardHosts = [];
+  function renderCards(host, list) {
+    cardHosts.push({ host: host, list: list });
+    drawCards(host, list);
+  }
+  function drawCards(host, list) {
+    host.innerHTML = list.map(function (s) {
+      return '<article class="stepcard' + (checked[s.n] ? " checked" : "") + '" id="paso-' + s.n + '"><div class="sc-head"><span class="num">Paso ' + s.n + "</span><h3>" + esc(s.title) +
+        '</h3><label class="doneLab"><input type="checkbox" class="stepchk" data-n="' + s.n + '"' + (checked[s.n] ? " checked" : "") + "> Hecho</label></div>" +
+        '<p class="why"><b>Para qué sirve.</b> ' + html(s.why) + "</p>" + s.blocks.map(blockHtml).join("") + "</article>";
+    }).join("");
+    $$(".stepchk", host).forEach(function (cb) {
       cb.addEventListener("change", function () {
-        li.classList.toggle("checked", cb.checked);
-        saved[i] = cb.checked; store.set("nv-steps-" + key, saved); updateMeter();
+        checked[cb.dataset.n] = cb.checked; store.set("nv-steps", checked);
+        cb.closest(".stepcard").classList.toggle("checked", cb.checked);
+        updateMeter();
       });
-      allChecks.push({ cb: cb, section: ol.closest("section").id });
-      ol.appendChild(li);
     });
   }
-  renderSteps("env", $("#stepsEnv"));
-  renderSteps("jenkins", $("#stepsJenkins"));
+  function redrawAll() { cardHosts.forEach(function (h) { drawCards(h.host, h.list); }); updateMeter(); }
 
   document.addEventListener("click", function (e) {
     var b = e.target.closest("[data-copy]");
     if (!b) return;
-    var text = $("code", b.parentNode).textContent;
+    var codeEl = $("code", b.parentNode);
     var done = function () { b.textContent = "Copiado"; setTimeout(function () { b.textContent = "Copiar"; }, 1400); };
     var fallback = function () {
-      var r = document.createRange(); r.selectNodeContents($("code", b.parentNode));
+      var r = document.createRange(); r.selectNodeContents(codeEl);
       var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r); b.textContent = "Selecciona y copia";
     };
-    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, fallback); else fallback();
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(codeEl.textContent).then(done, fallback); else fallback();
   });
 
   function updateMeter() {
-    var n = allChecks.filter(function (c) { return c.cb.checked; }).length;
-    $("#meterTxt").textContent = "Pasos " + n + " / " + allChecks.length;
-    $("#meterBar").style.width = (allChecks.length ? (100 * n / allChecks.length) : 0) + "%";
-    ["entorno", "jenkins"].forEach(function (id) {
-      var mine = allChecks.filter(function (c) { return c.section === id; });
-      var a = links.filter(function (l) { return l.getAttribute("href") === "#" + id; })[0];
-      a.classList.toggle("done", mine.length > 0 && mine.every(function (c) { return c.cb.checked; }));
+    var all = $$(".stepchk");
+    var n = all.filter(function (c) { return c.checked; }).length;
+    $("#meterTxt").textContent = "Pasos " + n + " / " + all.length;
+    $("#meterBar").style.width = (all.length ? (100 * n / all.length) : 0) + "%";
+    links.forEach(function (a) {
+      var sec = document.getElementById(a.getAttribute("href").slice(1));
+      var mine = $$(".stepchk", sec);
+      a.classList.toggle("done", mine.length > 0 && mine.every(function (c) { return c.checked; }));
     });
   }
+
+  /* ---------- barra de ajustes: sistema y repositorio ---------- */
+  function drawSettings() {
+    $("#settings").innerHTML =
+      '<div class="set-row"><span class="set-lab">Tu sistema</span><div class="seg" role="group" aria-label="Sistema operativo">' +
+      '<button type="button" id="osWin" aria-pressed="' + (prefs.os === "win") + '">Windows · PowerShell</button>' +
+      '<button type="button" id="osMac" aria-pressed="' + (prefs.os === "mac") + '">Mac o Linux · Terminal</button></div></div>' +
+      '<div class="set-row"><label class="set-lab" for="repoInput">Tu repositorio de GitHub</label>' +
+      '<input class="filter" id="repoInput" type="url" placeholder="' + REPO_PLACEHOLDER + '" value="' + esc(prefs.repo) + '" autocomplete="off" spellcheck="false"></div>' +
+      '<p class="small">Pega aquí la URL del repositorio que crees en el paso 2 y todos los comandos se completan solos. Se guarda solo en este navegador.</p>';
+    $("#osWin").addEventListener("click", function () { prefs.os = "win"; store.set("nv-prefs", prefs); drawSettings(); redrawAll(); });
+    $("#osMac").addEventListener("click", function () { prefs.os = "mac"; store.set("nv-prefs", prefs); drawSettings(); redrawAll(); });
+    $("#repoInput").addEventListener("input", function (e) { prefs.repo = e.target.value; store.set("nv-prefs", prefs); redrawAll(); });
+  }
+  drawSettings();
+
+  /* ---------- contenido de los pasos ---------- */
+  var labSteps = [
+    { n: 1, title: "Comprueba Docker y Git",
+      why: "Todo el laboratorio corre en contenedores de Docker y Git sube el código a GitHub. Si esto falla, nada de lo demás funcionará.",
+      blocks: [
+        { steps: [
+          { h: "Abre <b>Docker Desktop</b> y espera a que diga «Engine running» (el icono de la ballena queda fijo, sin animación)." },
+          { h: T("Abre <b>PowerShell</b> (tecla Windows, escribe PowerShell y pulsa Enter).", "Abre la aplicación <b>Terminal</b>.") },
+          { h: "Ejecuta estos dos comandos:", code: "docker version\ngit --version" }] },
+        { see: "<code>docker version</code> muestra dos bloques, <b>Client</b> y <b>Server</b>. Si solo aparece Client y un error en Server, Docker Desktop aún está arrancando: espera un minuto y repite. <code>git --version</code> muestra algo como <code>git version 2.x</code>." },
+        { warn: "Si el sistema no reconoce <code>git</code>, instálalo desde <a href=\"https://git-scm.com/downloads\" target=\"_blank\" rel=\"noopener\">git-scm.com/downloads</a> y abre una terminal nueva." }] },
+
+    { n: 2, title: "Sube el proyecto a tu repositorio de GitHub",
+      why: "Jenkins corre dentro de un contenedor y no puede ver las carpetas de tu equipo. Necesita clonar el código desde GitHub, así que el proyecto tiene que estar en tu propio repositorio antes de crear los jobs.",
+      blocks: [
+        { steps: [
+          { h: "Entra a <a href=\"https://github.com/new\" target=\"_blank\" rel=\"noopener\">github.com/new</a> y crea un repositorio llamado <code>neovirtual-devsecops</code>. Déjalo <b>vacío</b>: sin README, sin .gitignore y sin licencia. Puede ser público (más simple) o privado." },
+          { h: "Copia la URL que termina en <code>.git</code> y pégala en el campo <b>Tu repositorio de GitHub</b> de arriba. Así los comandos siguientes ya llevan tu URL." },
+          { h: "Descomprime el zip que te entregó el docente (por ejemplo en <code>" + "C:\\labs</code> o en <code>~/labs</code>) y entra a la carpeta:", code: T("cd C:\\labs\\neovirtual-devsecops\ndir", "cd ~/labs/neovirtual-devsecops\nls"),
+            note: "Deberías ver las carpetas <code>apps</code>, <code>docs</code> e <code>infra</code>. Si ves otra carpeta <code>neovirtual-devsecops</code> dentro, entra también a esa." },
+          { h: "Crea el repositorio local y guarda el primer commit (una foto del contenido):", code: "git init -b main\ngit add -A\ngit commit -m \"Proyecto inicial\"",
+            note: "Si Git dice «Please tell me who you are», ejecuta una sola vez <code>git config --global user.name \"Tu Nombre\"</code> y <code>git config --global user.email \"tu-correo@ejemplo.com\"</code>, y repite el commit." },
+          { h: "Conecta la carpeta con tu repositorio y sube el contenido:", code: "git remote add origin {{REPO}}\ngit push -u origin main" }] },
+        { see: "La primera vez se abre el navegador para iniciar sesión en GitHub. Al terminar, la consola muestra <code>Branch 'main' set up to track 'origin/main'</code> y al recargar tu repositorio en GitHub ves las carpetas <code>apps</code>, <code>docs</code> e <code>infra</code>." },
+        { warn: "Si el push dice <code>rejected</code>, tu repositorio no estaba vacío. Si no necesitas lo que tiene, usa <code>git push -u origin main --force</code>. Si lo necesitas, ejecuta primero <code>git pull origin main --allow-unrelated-histories --no-edit</code> y luego el push normal." }] },
+
+    { n: 3, title: "Levanta Jenkins",
+      why: "Jenkins es el servidor que ejecuta los pipelines. El proyecto trae uno preparado en la carpeta <code>infra</code>, con el comando <code>docker</code> instalado y conectado al Docker de tu equipo. Es necesario porque el pipeline construye imágenes y lanza las herramientas de seguridad como contenedores.",
+      blocks: [
+        { steps: [
+          { h: "Si ya tienes otro contenedor llamado <code>jenkins</code>, deténlo: el nuevo usa el mismo nombre y el mismo puerto 8080. Si el primer comando no lista ninguno, salta este punto.", code: "docker ps --format \"{{.Names}}\"\ndocker stop jenkins\ndocker rm jenkins" },
+          { h: "Desde la carpeta del proyecto, construye y arranca Jenkins:", code: "docker compose -f infra/docker-compose.jenkins.yml up -d --build", note: "La primera vez tarda entre 2 y 5 minutos. Termina con <code>Container jenkins Started</code>." },
+          { h: "Comprueba que Jenkins puede usar Docker:", code: "docker exec jenkins docker --version", note: "Debe mostrar <code>Docker version 26.x…</code>. Si dice «executable file not found», repite el punto anterior." },
+          { h: "Obtén la clave inicial de administrador y cópiala:", code: "docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword" },
+          { h: "Abre <a href=\"http://localhost:8080\" target=\"_blank\" rel=\"noopener\">http://localhost:8080</a>. Si dice «Jenkins is getting ready», espera 30 segundos y recarga." },
+          { h: "Pega la clave en <b>Administrator password</b> y pulsa <b>Continue</b>. Elige <b>Install suggested plugins</b> y espera (2 a 4 minutos)." },
+          { h: "En <b>Create First Admin User</b> crea tu usuario y contraseña (anótalos). Pulsa <b>Save and Continue</b>, luego <b>Save and Finish</b> y <b>Start using Jenkins</b>." }] },
+        { see: "El panel principal de Jenkins, vacío." }] },
+
+    { n: 4, title: "Crea las tres credenciales",
+      why: "La aplicación segura no guarda ninguna contraseña en el código. El pipeline las toma de Jenkins y las pasa al contenedor al desplegar. Los nombres (IDs) deben ser exactos, porque el Jenkinsfile los busca por nombre.",
+      blocks: [
+        { steps: [
+          { h: "Genera una clave secreta larga para firmar las sesiones. Copia el resultado: será el valor de la primera credencial.", code: T("$b = New-Object byte[] 32\n[Security.Cryptography.RandomNumberGenerator]::Create().GetBytes($b)\n($b | ForEach-Object { $_.ToString('x2') }) -join ''", "openssl rand -hex 32") },
+          { h: "En Jenkins ve a <b>Manage Jenkins → Credentials</b>. En la columna <b>Domains</b> de la fila <b>System</b> haz clic en <b>(global)</b>." },
+          { h: "Pulsa <b>Add Credentials</b> y crea <b>tres</b> credenciales con <b>Kind: Secret text</b>, dejando Scope en Global y pulsando <b>Create</b> tras cada una:" }] },
+        { table: [["Secret", "ID (exacto)"], [
+          ["la clave generada en el punto 1", "<code>taskmanager-secret-key</code>"],
+          ["la contraseña que quieras para el usuario <code>admin</code> de la app", "<code>taskmanager-admin-pw</code>"],
+          ["la contraseña que quieras para el usuario <code>user</code> de la app", "<code>taskmanager-user-pw</code>"]]] },
+        { p: "Anota las dos contraseñas de la app: las usarás en el paso 9 para iniciar sesión." },
+        { see: "Tres filas en la lista de credenciales globales, con esos IDs." }] },
+
+    { n: 5, title: "Crea los dos jobs",
+      why: "Un job le dice a Jenkins de dónde sacar el código y qué archivo de pipeline ejecutar. Los dos jobs usan el mismo repositorio y cambian solo la ruta del Jenkinsfile.",
+      blocks: [
+        { table: [["Nombre del job", "Script Path"], [
+          ["<code>taskmanager-sin-devsecops</code>", "<code>apps/taskmanager-sin-devsecops/Jenkinsfile</code>"],
+          ["<code>taskmanager-con-devsecops</code>", "<code>apps/taskmanager-con-devsecops/Jenkinsfile</code>"]]] },
+        { p: "Repite estos pasos <b>dos veces</b>, una por cada fila:" },
+        { steps: [
+          { h: "En el panel principal pulsa <b>New Item</b>. Escribe el nombre, elige <b>Pipeline</b> y pulsa <b>OK</b>." },
+          { h: "Baja a la sección <b>Pipeline</b>. En <b>Definition</b> elige <b>Pipeline script from SCM</b> y en <b>SCM</b> elige <b>Git</b>." },
+          { h: "Rellena estos campos y pulsa <b>Save</b>:", code: "Repository URL:   {{REPO}}\nBranch Specifier: */main\nScript Path:      (el de la tabla)" }] },
+        { warn: "Si tu repositorio es privado, junto a <b>Credentials</b> pulsa <b>Add → Jenkins</b>, elige <b>Username with password</b>, escribe tu usuario de GitHub y como contraseña un token personal con permiso <code>repo</code> (GitHub → Settings → Developer settings → Personal access tokens). Luego selecciónalo en la lista.", title: "Repositorio privado." },
+        { see: "La página del job, con el botón <b>Build Now</b> a la izquierda." }] },
+
+    { n: 6, title: "Ejecuta el pipeline sin DevSecOps",
+      why: "Es tu punto de comparación: verás que despliega todo en verde sin revisar nada.",
+      blocks: [
+        { steps: [
+          { h: "Entra al job <code>taskmanager-sin-devsecops</code> y pulsa <b>Build Now</b>." },
+          { h: "Pulsa el número del build (#1) en <b>Builds</b> y luego <b>Console Output</b> para ver el avance." },
+          { h: "Cuando termine, abre <a href=\"http://localhost:5001/login\" target=\"_blank\" rel=\"noopener\">http://localhost:5001/login</a>." }] },
+        { see: "<code>Finished: SUCCESS</code> en 1 a 3 minutos, con tres etapas: Build, Test y Deploy. La etapa Test solo imprime «No hay pruebas automatizadas». La app muestra un formulario de usuario y contraseña." }] },
+
+    { n: 7, title: "Ejecuta el pipeline con DevSecOps",
+      why: "Es el pipeline completo: diez etapas que verifican secretos, código, dependencias, imagen y aplicación, y que detienen el despliegue si algo falla.",
+      blocks: [
+        { steps: [
+          { h: "Entra al job <code>taskmanager-con-devsecops</code>, pulsa <b>Build Now</b> y abre el <b>Console Output</b>." },
+          { h: "Espera. La primera vez tarda entre 8 y 20 minutos porque descarga las imágenes de Gitleaks, Trivy y ZAP (ZAP pesa más de 1 GB). Las siguientes ejecuciones tardan unos 5 minutos." },
+          { h: "Cuando termine, abre <a href=\"http://localhost:5002/login\" target=\"_blank\" rel=\"noopener\">http://localhost:5002/login</a>." }] },
+        { table: [["#", "Etapa", "Qué verifica"], [
+          ["1", "Trazabilidad", "Guarda commit, build y fecha"],
+          ["2", "Secretos (Gitleaks)", "Que no haya claves en el código"],
+          ["3", "SAST (Bandit)", "Que el código propio no tenga patrones inseguros"],
+          ["4", "SCA (pip-audit)", "Que ninguna dependencia tenga vulnerabilidades conocidas"],
+          ["5", "Pruebas de seguridad", "29 pruebas con cobertura mínima de 80 %"],
+          ["6", "Build imagen", "Construye la imagen etiquetada con el commit"],
+          ["7", "Imagen + SBOM (Trivy)", "Vulnerabilidades graves en la imagen"],
+          ["8", "Deploy (staging)", "Despliega con tus tres credenciales"],
+          ["9", "Smoke test", "Espera a que la app responda «healthy»"],
+          ["10", "DAST (OWASP ZAP)", "Prueba la app en ejecución"]]] },
+        { see: "El build termina como <b>SUCCESS</b> o <b>UNSTABLE</b> (amarillo). Las dos son correctas: la etapa DAST queda en amarillo a propósito, porque ZAP informa avisos pero no bloquea el despliegue. La app muestra un formulario con tres campos: usuario, contraseña y código MFA." }] },
+
+    { n: 8, title: "Revisa la evidencia del build seguro",
+      why: "Es lo que le entregarías a un auditor: demuestra qué se verificó, cuándo y sobre qué commit.",
+      blocks: [
+        { p: "Entra al build seguro y pulsa <b>Build Artifacts</b>. Abre la carpeta <code>apps/taskmanager-con-devsecops/reports/</code>." },
+        { table: [["Archivo", "Qué contiene"], [
+          ["<code>build-info.json</code>", "Build, commit, rama, imagen y fecha. Responde «¿qué código corre en producción?»"],
+          ["<code>gitleaks.json</code>", "Resultado de la búsqueda de secretos"],
+          ["<code>bandit.json</code>", "Resultado del análisis del código"],
+          ["<code>pip-audit.json</code>", "Resultado de la revisión de dependencias"],
+          ["<code>junit.xml</code>, <code>coverage.xml</code>", "Resultado de las 29 pruebas y la cobertura"],
+          ["<code>sbom.cdx.json</code>", "Inventario de todos los componentes de la imagen"],
+          ["<code>trivy.json</code>", "Vulnerabilidades encontradas en la imagen"],
+          ["<code>zap-report.html</code>", "Informe de OWASP ZAP; ábrelo en el navegador"]]] }] }
+  ];
+
+  var attackSteps = [
+    { n: 9, title: "Ataca las dos aplicaciones de verdad",
+      why: "Ver con tus propios ojos qué consigue un atacante en la versión sin controles y cómo la segura lo detiene. Hazlo solo contra estos contenedores de tu equipo. Prueba cada ataque primero en la versión vulnerable (puerto 5001) y luego en la segura (puerto 5002).",
+      blocks: [
+        { p: "<b>9.1 Inyección SQL.</b> En <a href=\"http://localhost:5001/login\" target=\"_blank\" rel=\"noopener\">:5001/login</a> escribe usuario <code>admin</code> y contraseña <code>' OR '1'='1</code> (con las comillas simples). En la vulnerable entras al panel sin conocer la contraseña. Repite en <a href=\"http://localhost:5002/login\" target=\"_blank\" rel=\"noopener\">:5002/login</a> con cualquier código de 6 dígitos: responde «Credenciales invalidas». Con un usuario como <code>admin' --</code> responde «Datos invalidos»." },
+        { p: "<b>9.2 Borrado por enlace e IDOR.</b> En :5001 entra como <code>admin</code> / <code>password</code> y agrega una tarea (será la id 1). Abre una <b>ventana privada</b> (Ctrl+Shift+N), entra como <code>user</code> / <code>password</code> y abre <code>http://localhost:5001/delete_task/1</code>. Recarga el panel del admin: la tarea desapareció. En la segura, ese enlace responde <b>405</b> y un formulario falso sin token responde <b>400</b>." },
+        { p: "<b>9.3 Consola de depuración.</b> <code>http://localhost:5001/console</code> abre la consola de Werkzeug (ejecuta código en el servidor). <code>http://localhost:5002/console</code> responde <b>404</b>." },
+        { p: "<b>9.4 Fuerza bruta.</b> En :5002/login envía <b>6 veces</b> el usuario <code>user</code> con una contraseña incorrecta. Del 1 al 5 responde «Credenciales invalidas»; desde el 6.º, «Cuenta bloqueada temporalmente» (429). En la vulnerable puedes intentar sin límite. Mira los registros que dejó el ataque:" },
+        { code: "docker logs taskmanager-secure" },
+        { p: "Busca <code>\"event\": \"login_failure\"</code> y <code>\"event\": \"account_locked\"</code>: es la monitorización, cada intento queda registrado en JSON." },
+        { p: "<b>9.5 Entrar de verdad a la app segura.</b> Necesitas un código MFA. Esta línea imprime uno válido para <code>user</code> (cámbialo por <code>admin</code> si quieres el otro). Vale unos 30 segundos. Úsalo con usuario <code>user</code> y la contraseña que pusiste en <code>taskmanager-user-pw</code>:" },
+        { code: "docker exec taskmanager-secure python -c \"import pyotp,sqlite3; c=sqlite3.connect('/data/database.db'); print(pyotp.TOTP(c.execute('select mfa_secret from users where username=?',('user',)).fetchone()[0]).now())\"" },
+        { warn: "Si la cuenta quedó bloqueada por el ataque anterior, espera 5 minutos, o reinicia los datos con <code>docker rm -f taskmanager-secure</code>, luego <code>docker volume rm taskmanager-data</code> y vuelve a ejecutar el job.", title: "Cuenta bloqueada." },
+        { p: "Alternativa más realista: lee el secreto con <code>docker logs taskmanager-secure</code> (líneas que empiezan con <code>[MFA]</code>) y cárgalo en Google Authenticator o Authy." }] }
+  ];
+
+  var breakSteps = [
+    { n: 10, title: "Rompe el pipeline a propósito",
+      why: "Demostrar que el pipeline seguro detiene un cambio inseguro antes de que llegue a producción.",
+      blocks: [
+        { steps: [
+          { h: "En la carpeta del proyecto, cambia Flask por una versión con vulnerabilidades conocidas:", code: T("(Get-Content apps/taskmanager-con-devsecops/requirements.txt) -replace '^Flask==.*','Flask==2.0.1' | Set-Content apps/taskmanager-con-devsecops/requirements.txt", "sed -i.bak 's/^Flask==.*/Flask==2.0.1/' apps/taskmanager-con-devsecops/requirements.txt && rm apps/taskmanager-con-devsecops/requirements.txt.bak") },
+          { h: "Comprueba el cambio y súbelo:", code: "git diff\ngit commit -am \"test: forzar fallo de SCA\"\ngit push" },
+          { h: "En Jenkins ejecuta <b>Build Now</b> en <code>taskmanager-con-devsecops</code>." }] },
+        { see: "El build termina en rojo en la etapa <b>SCA (pip-audit)</b> y las siguientes quedan sin ejecutar. En el Console Output aparece <code>Found 2 known vulnerabilities in 1 package</code> con <code>flask 2.0.1</code>. La app desplegada antes sigue intacta: el cambio nunca llegó a producción." },
+        { steps: [
+          { h: "Revierte el cambio y vuelve a ejecutar <b>Build Now</b>; debe volver a pasar:", code: "git revert HEAD --no-edit\ngit push" }] },
+        { p: "<b>Otros cambios para probar</b> (cada uno se detiene en una etapa distinta):" },
+        { table: [["Cambio", "Se detiene en"], [
+          ["Escribir <code>app.run(debug=True)</code> en <code>app.py</code>", "SAST"],
+          ["Agregar <code>GITHUB_TOKEN = \"ghp_R2d9Kx7LmQ4vT8bN3cW6yZ1aF5hJ0sPuE2XD\"</code> en <code>app.py</code> (valor inventado con formato real; evita claves de ejemplo famosas como las de la documentación de AWS, que Gitleaks ignora a propósito)", "Secretos"],
+          ["Cambiar las dos líneas <code>FROM python:3.12-slim</code> por <code>FROM python:3.9</code> en el Dockerfile de la app segura (esperado; no verificado de punta a punta)", "Trivy"]]] },
+        { p: "Practica primero con el simulador de abajo si quieres ver qué mensaje da cada etapa." }] }
+  ];
+
+  var cleanSteps = [
+    { n: 11, title: "Limpia al terminar",
+      why: "Deja tu equipo como estaba. Primero detienes todo sin borrar nada; después, si quieres, lo eliminas por completo.",
+      blocks: [
+        { steps: [
+          { h: "Detener sin borrar:", code: "docker stop jenkins taskmanager-secure taskmanager-vulnerable" },
+          { h: "Borrar contenedores y datos del laboratorio:", code: "docker rm -f jenkins taskmanager-secure taskmanager-vulnerable\ndocker volume rm infra_jenkins_home taskmanager-data trivy-cache" }] },
+        { see: "<code>docker ps -a</code> ya no lista los contenedores del laboratorio." }] }
+  ];
+
+  renderCards($("#stepsLab"), labSteps);
+  renderCards($("#stepAttack"), attackSteps);
+  renderCards($("#stepBreak"), breakSteps);
+  renderCards($("#stepClean"), cleanSteps);
   updateMeter();
 
   /* ---------- 3 · simulador de ataques ---------- */
@@ -955,165 +1189,33 @@ details.faq p { color: var(--ink-2); margin-top: 0.5rem; font-size: 0.95rem; }
   }
   drawQuiz();
 
-  /* ---------- 8 · guía del docente ---------- */
-  var tr = function (cells, head) { return "<tr>" + cells.map(function (c) { return head ? "<th>" + c + "</th>" : "<td>" + c + "</td>"; }).join("") + "</tr>"; };
-  var table = function (head, rows) { return '<div class="scroll-x"><table class="cmp"><thead>' + tr(head, true) + "</thead><tbody>" + rows.map(function (r) { return tr(r); }).join("") + "</tbody></table></div>"; };
-  var cb = function (txt) { return '<div class="code"><pre><code>' + esc(txt) + '</code></pre><button type="button" data-copy>Copiar</button></div>'; };
 
-  var docTabs = [
-    { id: "resumen", name: "Resumen", html: function () {
-      return "<h3>Qué enseña</h3><p>NeoVirtual quiere un pipeline CI/CD con seguridad integrada. La auditoría encontró cuatro problemas: sin pruebas de seguridad automatizadas, mala gestión de dependencias, poca trazabilidad y monitorización insuficiente.</p>" +
-        "<p>El mismo gestor de tareas Flask se despliega por dos pipelines de Jenkins: uno sin controles y otro donde cada etapa verifica algo y puede detener el despliegue. Los estudiantes atacan ambas versiones, rompen el pipeline a propósito y revisan la evidencia que queda para el auditor.</p>" +
-        "<h3>Al terminar, el estudiante debería poder</h3><ul>" +
-        "<li>Explicar por qué una inyección SQL, un borrado por GET, un IDOR y una cuenta sin límite de intentos son fallas distintas, y qué control corrige cada una.</li>" +
-        "<li>Decir qué herramienta detecta cada tipo de problema (secretos, código, dependencias, imagen, aplicación en ejecución) y por qué ninguna sustituye a las otras.</li>" +
-        "<li>Responder «¿qué código corre en producción y quién lo verificó?» con evidencia y no de memoria.</li></ul>" +
-        "<h3>Requisitos</h3>" + table(["Qué", "Para qué"], [
-          ["Docker (Desktop en Windows o Mac)", "Todo corre en contenedores; no hace falta Python en el equipo"],
-          ["Jenkins en un contenedor llamado <code>jenkins</code> con el CLI y el socket de Docker (incluido en <code>infra/</code>)", "Ejecutar los dos pipelines. El nombre es obligatorio: el pipeline usa <code>--volumes-from jenkins</code>. Si es otro, cambia <code>JENKINS_CONTAINER</code> en el Jenkinsfile seguro"],
-          ["Acceso de escritura a <code>https://github.com/yasserguerrat-hub/neovirtual-devsecops.git</code>", "Jenkins corre en un contenedor y clona desde esa URL; no ve la carpeta local"],
-          ["Navegador", "Abrir este archivo; funciona sin servidor"]]) +
-        "<h3>Mapa del repositorio</h3>" + cb("neovirtual-devsecops/\n├── apps/\n│   ├── taskmanager-sin-devsecops/   :5001 vulnerable a propósito\n│   └── taskmanager-con-devsecops/   :5002 corregida + pipeline seguro\n├── docs/\n│   ├── clase-interactiva.html       este archivo\n│   ├── demo-ataques.md              ataques contra las apps reales\n│   ├── auditoria-trazabilidad.md    hallazgo → control → evidencia\n│   └── guia-del-docente.md          versión en texto de esta guía\n├── infra/                           Jenkins listo para el laboratorio\n└── docker-compose.yml               levanta ambas apps sin Jenkins") +
-        '<p class="callout" style="margin:0"><b>Repositorio propio.</b> El proyecto se entrega sin historial de Git. Inicialízalo con <code>git init</code> y súbelo a <code>https://github.com/yasserguerrat-hub/neovirtual-devsecops.git</code> antes de crear los jobs, porque Jenkins clona desde esa URL.</p>';
-    } },
-    { id: "apps", name: "Las apps", html: function () {
-      return "<h3>Sin DevSecOps · puerto 5001</h3><p>Es el código original de la evaluación, sin modificar. Credenciales: <code>admin</code> / <code>password</code> y <code>user</code> / <code>password</code>.</p>" +
-        table(["Falla", "Dónde", "Qué ocurre"], [
-          ["Inyección SQL", "<code>/login</code>, líneas 33 a 36 de <code>app.py</code>", "Si la contraseña contiene <code>' OR '</code> la consulta se arma concatenando texto. Con <code>' OR '1'='1</code> se entra como admin."],
-          ["CSRF", "<code>/delete_task/&lt;id&gt;</code> por GET", "Una acción que modifica datos responde a GET y no pide token. Un <code>&lt;img&gt;</code> en cualquier página borra la tarea de la víctima."],
-          ["IDOR", "mismo endpoint", "Borra por id sin comprobar de quién es la tarea."],
-          ["Autenticación débil", "<code>hash_password</code>", "SHA-256 sin sal, sin MFA, intentos ilimitados."],
-          ["Debug activo", "<code>Dockerfile</code> (<code>FLASK_DEBUG=1</code>)", "Expone la consola de Werkzeug en <code>/console</code>."]]) +
-        "<p>Alrededor del código hay fallas de proceso que también forman parte de la demostración: dependencias antiguas con CVE (Flask 2.0.1, Werkzeug 2.0.1, Jinja2 3.0.1), imagen <code>python:3.9</code> completa, contenedor como root y una etapa Test vacía.</p>" +
-        '<p class="callout" style="margin:0"><b>Matiz sobre XSS.</b> El enunciado original lo menciona, pero ninguna de las dos apps es explotable: Jinja2 escapa la salida. Dilo en clase; es un buen ejemplo de que no todo hallazgo es explotable y de que las pruebas sirven para confirmarlo. La app segura añade una CSP como segunda barrera.</p>' +
-        "<h3>Con DevSecOps · puerto 5002</h3>" +
-        table(["Control", "Cómo está implementado"], [
-          ["Inyección SQL", "Consultas siempre parametrizadas; usuario y código MFA validados con expresiones regulares (lista blanca) antes de tocar la base"],
-          ["CSRF", "Token por sesión comparado con <code>secrets.compare_digest</code>; borrado solo por POST; cookie <code>SameSite=Lax</code>"],
-          ["IDOR", "<code>DELETE … WHERE id = ? AND user_id = ?</code>"],
-          ["Autenticación", "Hash con sal, MFA TOTP obligatorio, bloqueo tras 5 fallos por 300 s, error genérico, <code>session.clear()</code> al iniciar sesión"],
-          ["Control de acceso", "<code>/admin</code> exige <code>role == admin</code> en la sesión firmada; si no, 403"],
-          ["Cabeceras", "CSP, X-Frame-Options, nosniff, Referrer-Policy, Permissions-Policy, COOP, CORP y Cache-Control: no-store"],
-          ["Contenedor", "Multi-etapa, uid 10001, sistema de archivos de solo lectura, sin capabilities, HEALTHCHECK"]]) +
-        "<h3>Qué cambié respecto del código de la evaluación</h3><ul>" +
-        "<li><code>create_db.py</code> ya no trae contraseñas por defecto: las toma del entorno o genera una aleatoria.</li>" +
-        "<li><code>app.py</code> registra eventos de seguridad en JSON, expone <code>/health</code> y añade cabeceras (las pidió ZAP).</li>" +
-        "<li>Dependencias fijadas sin CVE (Flask 3.1.3, Werkzeug 3.1.9). La primera versión que fijé fue rechazada por <code>pip-audit</code>.</li>" +
-        "<li><code>app.run</code> escucha en 127.0.0.1 por defecto; en el contenedor corre gunicorn.</li></ul>" +
-        "<h3>MFA</h3><p>Al crear la base se imprime un secreto TOTP por usuario. Cárgalo en Google Authenticator o similar. Un código vale 30 segundos y se acepta una ventana de ±1.</p>" + cb("docker logs taskmanager-secure | grep MFA");
-    } },
-    { id: "pipeline", name: "Pipeline", html: function () {
-      var y = '<span class="pill y">sí</span>', n = '<span class="pill n">no · UNSTABLE</span>';
-      return "<p>Archivo: <code>apps/taskmanager-con-devsecops/Jenkinsfile</code>. Las herramientas corren en contenedores efímeros de versión fija; Jenkins no necesita Python ni nada instalado.</p>" +
-        table(["#", "Etapa", "Herramienta", "Qué detecta", "Bloquea", "Evidencia"], [
-          ["1", "Trazabilidad", "git", "Registra build, commit, rama, imagen y fecha", "n/a", "build-info.json"],
-          ["2", "Secretos", "Gitleaks", "Claves y contraseñas en el código", y, "gitleaks.json"],
-          ["3", "SAST", "Bandit", "Patrones inseguros en el código propio, severidad media o mayor", y, "bandit.json"],
-          ["4", "SCA", "pip-audit", "Dependencias con CVE conocidos", y, "pip-audit.json"],
-          ["5", "Pruebas", "pytest", "29 pruebas de seguridad, mínimo 80 % de cobertura (hoy ≈97 %)", y, "junit.xml, coverage.xml"],
-          ["6", "Build imagen", "docker", "Construye y etiqueta con el commit", y, "etiquetas OCI"],
-          ["7", "Imagen + SBOM", "Trivy", "HIGH/CRITICAL con parche; inventario CycloneDX", y, "trivy.json, sbom.cdx.json"],
-          ["8", "Deploy staging", "docker", "Secretos de Jenkins, solo lectura, sin capabilities", y, "contenedor desplegado"],
-          ["9", "Smoke test", "healthcheck", "Espera el estado healthy", y, "estado del contenedor"],
-          ["10", "DAST", "OWASP ZAP", "Prueba la app en ejecución, pasiva y sin autenticar", n, "zap-report.html / .json"]]) +
-        "<h3>Si preguntan «¿no basta con una herramienta?»</h3><p>Gitleaks no ve CVE, Bandit no ve dependencias, pip-audit no ve el código propio, Trivy ve el sistema operativo de la imagen y ZAP ve cómo se comporta la app desde fuera. Es defensa en capas.</p>" +
-        "<h3>Por qué ZAP no bloquea</h3><p>Es una decisión de política y no un límite técnico: el baseline es pasivo y sin autenticar y sus avisos actuales son informativos. Para que bloquee basta quitar <code>catchError</code> de esa etapa. La discusión suele salir sola.</p>" +
-        "<h3>Secretos</h3><p>El pipeline lee tres credenciales de Jenkins y las pasa al contenedor como variables de entorno sin escribirlas en la línea de comandos. Ningún secreto vive en el repositorio.</p>" +
-        "<h3>Pipeline sin DevSecOps</h3><p>Build, Test (vacío) y Deploy. Termina verde en un minuto.</p>";
-    } },
-    { id: "agenda", name: "Agenda", html: function () {
-      return "<p>Duración sugerida: 2 horas.</p>" + table(["Min", "Bloque", "Material"], [
-        ["0–10", "Caso y hallazgos de la auditoría", "Secciones Inicio y Escenario"],
-        ["10–25", "Levantar las dos apps (lo hacen los estudiantes)", "Sección Entorno"],
-        ["25–50", "Ataques contra la versión vulnerable y luego la segura", "Simulador para explicar; después <code>docs/demo-ataques.md</code> contra las apps reales"],
-        ["50–55", "Pausa", ""],
-        ["55–75", "Crear los dos jobs y ejecutarlos", "Sección Jenkins. Mientras corre el seguro, explica las etapas con la tabla de Pipeline"],
-        ["75–95", "Romper el pipeline a propósito", "Simulador de pipeline y luego el cambio de Flask a 2.0.1 en vivo"],
-        ["95–110", "Evidencia para el auditor", "Artefactos del build y sección Evidencia"],
-        ["110–120", "Cierre", "Cuestionario"]]) +
-        '<p class="callout" style="margin:0"><b>Consejo.</b> El primer build seguro tarda varios minutos porque descarga imágenes (ZAP pesa más de 1 GB). Lánzalo antes de la clase o al empezar el bloque de ataques.</p>' +
-        "<h3>Resultados esperados contra las apps reales</h3>" + table(["Ataque", "Sin DevSecOps :5001", "Con DevSecOps :5002"], [
-          ["Login con <code>admin</code> y <code>' OR '1'='1</code>", "Entra al panel sin la contraseña", "401; con un usuario como <code>admin' --</code> responde 400"],
-          ["Abrir <code>/delete_task/1</code> con sesión", "Borra la tarea (302)", "405; un POST sin token da 400"],
-          ["Abrir <code>/console</code>", "200, consola de Werkzeug", "404"],
-          ["5 o más contraseñas incorrectas", "Sin límite", "A la quinta se bloquea; las siguientes dan 429"]]) +
-        "<p>Eventos de seguridad de la app segura:</p>" + cb("docker logs taskmanager-secure\n# busca: login_failure, account_locked, csrf_rejected, login_invalid_input") +
-        "<h3>Romper el pipeline en vivo</h3><p>Cambia Flask a una versión vulnerable, sube el cambio y ejecuta el job. Debe fallar en SCA y no llegar a Deploy. Revierte después.</p>" +
-        cb("sed -i 's/^Flask==.*/Flask==2.0.1/' apps/taskmanager-con-devsecops/requirements.txt\ngit commit -am \"test: forzar fallo de SCA\" && git push") +
-        "<p>Otros cambios que se detienen: concatenar SQL (SAST), <code>debug=True</code> (SAST), commitear una clave (Secretos) y quitar la verificación CSRF (Pruebas).</p>";
-    } },
-    { id: "ensayo", name: "Ensayo previo", html: function () {
-      var items = [
-        "Levanté Jenkins y creé las tres credenciales Secret text con los IDs exactos",
-        "Creé los dos jobs con su Script Path y ejecuté el job sin DevSecOps: verde y respondiendo en :5001",
-        "Detuve con docker compose down cualquier copia local de las apps para liberar :5001 y :5002",
-        "Ejecuté el job seguro: diez etapas, DAST en amarillo y respondiendo en :5002",
-        "El build tiene artefactos en apps/taskmanager-con-devsecops/reports/",
-        "Cambié Flask a 2.0.1, el job falló en SCA, y revertí el cambio"
-      ];
-      var saved = store.get("nv-ensayo", {});
-      return '<p class="callout" style="margin:0"><b>Obligatorio, 30 minutos.</b> Probé cada pieza del pipeline por separado en Docker, pero <b>no ejecuté el Jenkinsfile completo dentro de Jenkins</b>. Esta pasada confirma que todo funciona junto en tu equipo.</p><ol class="steps" style="list-style:none;padding:0">' +
-        items.map(function (t, i) {
-          return '<li class="step' + (saved[i] ? " checked" : "") + '"><input type="checkbox" id="ens-' + i + '" data-ens="' + i + '"' + (saved[i] ? " checked" : "") + '><div><label for="ens-' + i + '">' + esc(t) + "</label></div></li>";
-        }).join("") + "</ol>";
-    } },
-    { id: "problemas", name: "Problemas frecuentes", html: function () {
-      return '<input class="filter" id="probFilter" type="search" placeholder="Filtrar por palabra (puerto, credenciales, ZAP…)" aria-label="Filtrar problemas">' +
-        '<div class="scroll-x"><table class="cmp"><thead><tr><th>Síntoma</th><th>Causa y solución</th></tr></thead><tbody id="probBody"></tbody></table></div>';
-    }, after: function () {
-      var rows = [
-        ["port is already allocated en 5001 o 5002", "Tienes <code>docker compose up</code> activo y el pipeline usa los mismos puertos. Ejecuta <code>docker compose down</code> en la raíz del repo antes de los jobs."],
-        ["Secretos o SAST fallan con «no such container: jenkins» o no encuentran archivos", "El contenedor de Jenkins no se llama <code>jenkins</code>. Renómbralo o cambia <code>JENKINS_CONTAINER</code>."],
-        ["docker: command not found dentro de Jenkins", "La imagen de Jenkins no tiene el CLI de Docker o no monta <code>/var/run/docker.sock</code>. En Debian 13 el paquete <code>docker.io</code> no trae el comando <code>docker</code>; hace falta <code>docker-cli</code>. Usa <code>infra/docker-compose.jenkins.yml</code> y comprueba con <code>docker exec jenkins docker --version</code>."],
-        ["Falla el deploy por credenciales", "Los IDs deben ser exactamente <code>taskmanager-secret-key</code>, <code>taskmanager-admin-pw</code> y <code>taskmanager-user-pw</code>, tipo Secret text."],
-        ["Cambié las contraseñas y la app segura pide las antiguas", "La base vive en el volumen <code>taskmanager-data</code> y los usuarios existentes no se actualizan. Ejecuta <code>docker volume rm taskmanager-data</code> y vuelve a desplegar."],
-        ["Trivy tarda mucho la primera vez", "Descarga su base de datos. Se guarda en el volumen <code>trivy-cache</code>; las siguientes ejecuciones son rápidas."],
-        ["ZAP falla con «directory /zap/wrk is not mounted»", "Ya está resuelto con el volumen <code>zap-wrk</code>. Si modificas esa etapa, conserva el volumen y el <code>chown 1000:1000</code>."],
-        ["El código MFA siempre es inválido", "El reloj del equipo está desfasado, o cargaste el secreto del otro usuario. Los de admin y user son distintos."],
-        ["pip-audit falla en un build que antes pasaba", "Aparecieron CVE nuevos. Es el comportamiento esperado de la compuerta: actualiza la versión afectada."],
-        ["Trivy falla sin cambios tuyos", "Se publicó una vulnerabilidad nueva en la imagen base. Reconstruye con una base actualizada o ajusta la política con criterio."]
-      ];
-      var body = $("#probBody"), input = $("#probFilter");
-      function draw() {
-        var q = input.value.trim().toLowerCase();
-        body.innerHTML = rows.filter(function (r) { return !q || (r[0] + " " + r[1]).toLowerCase().indexOf(q) !== -1; })
-          .map(function (r) { return "<tr><td>" + esc(r[0]) + "</td><td>" + r[1] + "</td></tr>"; }).join("") || '<tr><td colspan="2">Sin coincidencias.</td></tr>';
-      }
-      input.addEventListener("input", draw); draw();
-    } },
-    { id: "faq", name: "Preguntas esperadas", html: function () {
-      var f = [
-        ["¿Por qué la app sin DevSecOps se parece a un caso real?", "Porque las fallas de proceso (dependencias viejas, root, debug, test vacío) son tan comunes como las del código. Muestra que el problema no es solo escribir mal una consulta."],
-        ["¿Esto es seguro para producción?", "No tal cual. Es un laboratorio: usa SQLite y HTTP. En producción irían una base gestionada, HTTPS con COOKIE_SECURE=true, un gestor de secretos y un SIEM que consuma los logs JSON."],
-        ["¿Por qué hay SQLi si el código ya usa ? en la rama normal?", "Porque la vulnerabilidad está en la rama que concatena. Basta una ruta insegura para que toda la defensa falle."],
-        ["¿Para qué sirve el SBOM?", "Es el inventario exacto de componentes de la imagen. Si mañana sale un CVE en una librería, sabes en qué versiones desplegadas está."],
-        ["¿Dónde queda la monitorización?", "En tres capas: eventos JSON de seguridad en la app, /health con HEALTHCHECK de Docker y un smoke test al desplegar. Alertar sobre ellos requiere un colector externo, fuera del alcance del laboratorio."],
-        ["¿Qué no cubre el laboratorio?", "Autenticación en ZAP o pruebas dinámicas profundas, un SIEM real, gestión de secretos fuera de Jenkins y despliegues fuera de un Docker local. Son buenas extensiones para una segunda sesión."],
-        ["¿Es seguro ejecutar la app vulnerable?", "Solo en una máquina o red aislada. Es vulnerable a propósito; no la expongas a internet."]
-      ];
-      return f.map(function (x) { return '<details class="faq"><summary>' + esc(x[0]) + "</summary><p>" + esc(x[1]) + "</p></details>"; }).join("");
-    } }
-  ];
-  var docTabsEl = $("#docTabs"), docPanel = $("#docPanel");
-  function showDoc(id) {
-    var d = docTabs.filter(function (x) { return x.id === id; })[0];
-    $$(".tab", docTabsEl).forEach(function (b) { b.setAttribute("aria-selected", String(b.dataset.id === id)); });
-    docPanel.innerHTML = d.html();
-    if (d.after) d.after();
-    $$("[data-ens]", docPanel).forEach(function (c) {
-      c.addEventListener("change", function () {
-        var s = store.get("nv-ensayo", {}); s[c.dataset.ens] = c.checked; store.set("nv-ensayo", s);
-        c.closest(".step").classList.toggle("checked", c.checked);
-      });
-    });
-  }
-  docTabs.forEach(function (d) {
-    var b = document.createElement("button");
-    b.className = "tab"; b.type = "button"; b.setAttribute("role", "tab"); b.dataset.id = d.id; b.textContent = d.name;
-    b.addEventListener("click", function () { showDoc(d.id); });
-    docTabsEl.appendChild(b);
-  });
-  showDoc("resumen");
+  /* ---------- ayuda: problemas frecuentes ---------- */
+  (function () {
+    var rows = [
+      ["<code>docker</code> no se reconoce o <code>docker version</code> no muestra Server", "Docker Desktop no está encendido o aún arranca. Ábrelo, espera a «Engine running» y repite (paso 1)."],
+      ["<code>docker: command not found</code> dentro de un build de Jenkins", "Estás usando otro Jenkins. Repite el paso 3 y comprueba con <code>docker exec jenkins docker --version</code>."],
+      ["<code>container name \"/jenkins\" is already in use</code>", "Hay otro contenedor llamado <code>jenkins</code>. Ejecuta <code>docker rm -f jenkins</code> y repite el paso 3."],
+      ["<code>port is already allocated</code> (8080, 5001 o 5002)", "Otro programa usa ese puerto. Ejecuta <code>docker ps</code> y detén el contenedor que lo ocupa."],
+      ["<code>git push</code> dice <code>rejected</code>", "Tu repositorio no estaba vacío. Mira el aviso del paso 2 (pull con <code>--allow-unrelated-histories</code> o <code>--force</code>)."],
+      ["Git pide usuario y contraseña, o falla la autenticación", "GitHub ya no acepta contraseñas en la terminal. Inicia sesión en la ventana del navegador que se abre, o usa un token personal."],
+      ["El job de Jenkins no clona el repositorio", "Revisa la URL y la rama <code>*/main</code>. Si el repositorio es privado, agrega las credenciales (paso 5)."],
+      ["<code>Could not find credentials entry with ID 'taskmanager-…'</code>", "Los tres IDs deben ser exactos y de tipo <b>Secret text</b> (paso 4)."],
+      ["<code>no such container: jenkins</code> en Secretos o SAST", "El contenedor de Jenkins debe llamarse exactamente <code>jenkins</code>."],
+      ["Cambié las contraseñas de las credenciales y la app segura sigue con las anteriores", "La base de datos vive en un volumen. Ejecuta <code>docker rm -f taskmanager-secure</code>, luego <code>docker volume rm taskmanager-data</code> y vuelve a ejecutar el job."],
+      ["El código MFA siempre es inválido", "Revisa que la hora del equipo sea correcta y que uses el secreto del usuario correcto: <code>admin</code> y <code>user</code> tienen secretos distintos."],
+      ["La cuenta quedó bloqueada (429)", "Es el bloqueo tras 5 fallos. Espera 5 minutos o reinicia los datos (aviso del paso 9)."],
+      ["La etapa ZAP tarda mucho", "La primera vez descarga más de 1 GB. Espera; las siguientes ejecuciones son más rápidas."],
+      ["Trivy, pip-audit o Gitleaks fallan sin que cambies nada", "Apareció una vulnerabilidad nueva. Es la compuerta funcionando: actualiza la versión afectada y vuelve a ejecutar."]
+    ];
+    var body = $("#probBody"), input = $("#probFilter");
+    function draw() {
+      var q = input.value.trim().toLowerCase();
+      body.innerHTML = rows.filter(function (r) { return !q || (r[0] + " " + r[1]).replace(/<[^>]+>/g, "").toLowerCase().indexOf(q) !== -1; })
+        .map(function (r) { return '<tr><td style="padding-left:1rem">' + r[0] + "</td><td>" + r[1] + "</td></tr>"; }).join("") || '<tr><td colspan="2" style="padding-left:1rem">Sin coincidencias.</td></tr>';
+    }
+    input.addEventListener("input", draw); draw();
+  })();
 })();
 </script>
 </body>
