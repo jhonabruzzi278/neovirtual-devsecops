@@ -376,7 +376,7 @@ details.faq p { color: var(--ink-2); margin-top: 0.5rem; font-size: 0.95rem; }
     <section id="jenkins" data-label="Jenkins">
       <div class="eyebrow"><b>Compuerta 5</b> · automatizar</div>
       <h2>Crea los dos jobs en Jenkins</h2>
-      <p class="lede">Jenkins corre en <code>http://localhost:8080</code> con el Docker del equipo montado. Las herramientas de seguridad se ejecutan en contenedores de versión fija, así que no hay nada que instalar en Jenkins.</p>
+      <p class="lede">Jenkins corre en <code>http://localhost:8080</code> con el Docker del equipo montado. Las herramientas de seguridad se ejecutan en contenedores de versión fija, así que no hay nada más que instalar en Jenkins.</p>
       <ol class="steps" id="stepsJenkins"></ol>
     </section>
 
@@ -401,7 +401,7 @@ details.faq p { color: var(--ink-2); margin-top: 0.5rem; font-size: 0.95rem; }
       <h2>Comprueba lo aprendido</h2>
       <p class="lede">Seis preguntas. Cada respuesta explica el porqué.</p>
       <div class="block q" id="quiz"></div>
-      <footer>Repositorio: <a href="https://github.com/jhonabruzzi278/neovirtual-devsecops" target="_blank" rel="noopener">github.com/jhonabruzzi278/neovirtual-devsecops</a> · Laboratorio educativo: la app «sin DevSecOps» es vulnerable a propósito; no la expongas fuera de un entorno aislado.</footer>
+      <footer>Laboratorio educativo: la app «sin DevSecOps» es vulnerable a propósito; no la expongas fuera de un entorno aislado.</footer>
     </section>
 
     <!-- ================= 8 · Guía del docente ================= -->
@@ -518,15 +518,17 @@ details.faq p { color: var(--ink-2); margin-top: 0.5rem; font-size: 0.95rem; }
   /* ---------- listas de pasos con copia y persistencia ---------- */
   var steps = {
     env: [
-      { t: "Clona el repositorio", d: "Trae las dos aplicaciones y los pipelines.", c: "git clone https://github.com/jhonabruzzi278/neovirtual-devsecops.git\ncd neovirtual-devsecops" },
+      { t: "Inicializa el repositorio", d: "Descomprime el zip, entra a la carpeta y crea el repositorio Git desde cero.", c: "cd neovirtual-devsecops\ngit init -b main\ngit add -A\ngit commit -m \"Proyecto inicial\"" },
       { t: "Crea tu archivo de credenciales", d: "Los valores de la app segura nunca van en el código. El archivo .env está ignorado por Git.", c: "cp .env.example .env\n# edita SECRET_KEY, ADMIN_PW y USER_PW" },
       { t: "Levanta ambas apps", d: "Construye las imágenes y arranca los contenedores. La vulnerable queda en :5001 y la segura en :5002.", c: "docker compose up -d --build\ndocker compose ps" },
       { t: "Obtén el secreto MFA de la app segura", d: "Se imprime una vez al crear la base de datos. Cárgalo en una app TOTP como Google Authenticator.", c: "docker logs taskmanager-secure | grep MFA" },
       { t: "Ejecuta las 29 pruebas de seguridad", d: "Mismo comando que corre el pipeline, dentro de un contenedor para no instalar Python.", c: "docker run --rm -v \"$PWD/apps/taskmanager-con-devsecops:/app\" -w /app python:3.12-slim \\\n  sh -c \"pip install -q -r requirements-dev.txt && pytest --cov=app --cov-fail-under=80\"" }
     ],
     jenkins: [
+      { t: "Levanta Jenkins", d: "El repositorio incluye un Jenkins con el CLI de Docker y el socket del equipo. Abre http://localhost:8080, pega la clave inicial e instala los plugins sugeridos.", c: "docker compose -f infra/docker-compose.jenkins.yml up -d --build\ndocker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword" },
       { t: "Crea tres credenciales Secret text", d: "Manage Jenkins → Credentials → Global. Los IDs deben ser exactos.", c: "taskmanager-secret-key   # openssl rand -hex 32\ntaskmanager-admin-pw\ntaskmanager-user-pw" },
-      { t: "Crea el job sin DevSecOps", d: "New Item → Pipeline → Pipeline script from SCM → Git, rama */main.", c: "Repository URL: https://github.com/jhonabruzzi278/neovirtual-devsecops.git\nScript Path:    apps/taskmanager-sin-devsecops/Jenkinsfile" },
+      { t: "Sube el repositorio a tu propio remoto", d: "Jenkins corre en un contenedor y no ve tu carpeta local, así que necesita clonar desde GitHub, GitLab u otro servidor Git. Crea un repositorio vacío ahí y súbelo.", c: "git remote add origin <URL-DE-TU-REPOSITORIO>\ngit push -u origin main" },
+      { t: "Crea el job sin DevSecOps", d: "New Item → Pipeline → Pipeline script from SCM → Git, rama */main. Si el repositorio es privado, agrega credenciales de acceso en el job.", c: "Repository URL: <URL-DE-TU-REPOSITORIO>\nScript Path:    apps/taskmanager-sin-devsecops/Jenkinsfile" },
       { t: "Crea el job con DevSecOps", d: "Mismo repositorio; solo cambia la ruta del Jenkinsfile.", c: "Script Path:    apps/taskmanager-con-devsecops/Jenkinsfile" },
       { t: "Ejecuta ambos con Build Now y compara", d: "El primero termina verde en un minuto. El segundo recorre diez etapas; revisa los artefactos archivados del build." },
       { t: "Reintroduce una vulnerabilidad en el job seguro", d: "Por ejemplo baja Flask a 2.0.1 en requirements.txt, haz push y ejecuta de nuevo. Debe fallar en SCA antes de llegar a Deploy.", c: "sed -i 's/^Flask==.*/Flask==2.0.1/' apps/taskmanager-con-devsecops/requirements.txt\ngit commit -am \"test: forzar fallo de SCA\" && git push" }
@@ -968,10 +970,11 @@ details.faq p { color: var(--ink-2); margin-top: 0.5rem; font-size: 0.95rem; }
         "<li>Responder «¿qué código corre en producción y quién lo verificó?» con evidencia y no de memoria.</li></ul>" +
         "<h3>Requisitos</h3>" + table(["Qué", "Para qué"], [
           ["Docker (Desktop en Windows o Mac)", "Todo corre en contenedores; no hace falta Python en el equipo"],
-          ["Jenkins en un contenedor llamado <code>jenkins</code> con el socket de Docker montado", "Ejecutar los dos pipelines. El nombre es obligatorio: el pipeline usa <code>--volumes-from jenkins</code>. Si es otro, cambia <code>JENKINS_CONTAINER</code> en el Jenkinsfile seguro"],
+          ["Jenkins en un contenedor llamado <code>jenkins</code> con el CLI y el socket de Docker (incluido en <code>infra/</code>)", "Ejecutar los dos pipelines. El nombre es obligatorio: el pipeline usa <code>--volumes-from jenkins</code>. Si es otro, cambia <code>JENKINS_CONTAINER</code> en el Jenkinsfile seguro"],
+          ["Un repositorio Git remoto propio (GitHub, GitLab…)", "Jenkins corre en un contenedor y clona desde una URL; no ve la carpeta local"],
           ["Navegador", "Abrir este archivo; funciona sin servidor"]]) +
-        "<h3>Mapa del repositorio</h3>" + cb("neovirtual-devsecops/\n├── apps/\n│   ├── taskmanager-sin-devsecops/   :5001 vulnerable a propósito\n│   └── taskmanager-con-devsecops/   :5002 corregida + pipeline seguro\n├── docs/\n│   ├── clase-interactiva.html       este archivo\n│   ├── demo-ataques.md              ataques contra las apps reales\n│   ├── auditoria-trazabilidad.md    hallazgo → control → evidencia\n│   └── guia-del-docente.md          versión en texto de esta guía\n└── docker-compose.yml               levanta ambas apps sin Jenkins") +
-        '<p class="score">Repositorio: <a href="https://github.com/jhonabruzzi278/neovirtual-devsecops" target="_blank" rel="noopener">github.com/jhonabruzzi278/neovirtual-devsecops</a></p>';
+        "<h3>Mapa del repositorio</h3>" + cb("neovirtual-devsecops/\n├── apps/\n│   ├── taskmanager-sin-devsecops/   :5001 vulnerable a propósito\n│   └── taskmanager-con-devsecops/   :5002 corregida + pipeline seguro\n├── docs/\n│   ├── clase-interactiva.html       este archivo\n│   ├── demo-ataques.md              ataques contra las apps reales\n│   ├── auditoria-trazabilidad.md    hallazgo → control → evidencia\n│   └── guia-del-docente.md          versión en texto de esta guía\n├── infra/                           Jenkins listo para el laboratorio\n└── docker-compose.yml               levanta ambas apps sin Jenkins") +
+        '<p class="callout" style="margin:0"><b>Repositorio propio.</b> El proyecto se entrega sin historial de Git. Inicialízalo con <code>git init</code> y súbelo a tu propio remoto (GitHub, GitLab…) antes de crear los jobs, porque Jenkins clona desde una URL.</p>';
     } },
     { id: "apps", name: "Las apps", html: function () {
       return "<h3>Sin DevSecOps · puerto 5001</h3><p>Es el código original de la evaluación, sin modificar. Credenciales: <code>admin</code> / <code>password</code> y <code>user</code> / <code>password</code>.</p>" +
@@ -1061,7 +1064,7 @@ details.faq p { color: var(--ink-2); margin-top: 0.5rem; font-size: 0.95rem; }
       var rows = [
         ["port is already allocated en 5001 o 5002", "Tienes <code>docker compose up</code> activo y el pipeline usa los mismos puertos. Ejecuta <code>docker compose down</code> en la raíz del repo antes de los jobs."],
         ["Secretos o SAST fallan con «no such container: jenkins» o no encuentran archivos", "El contenedor de Jenkins no se llama <code>jenkins</code>. Renómbralo o cambia <code>JENKINS_CONTAINER</code>."],
-        ["docker: command not found dentro de Jenkins", "La imagen de Jenkins no tiene el CLI de Docker o no monta <code>/var/run/docker.sock</code>."],
+        ["docker: command not found dentro de Jenkins", "La imagen de Jenkins no tiene el CLI de Docker o no monta <code>/var/run/docker.sock</code>. En Debian 13 el paquete <code>docker.io</code> no trae el comando <code>docker</code>; hace falta <code>docker-cli</code>. Usa <code>infra/docker-compose.jenkins.yml</code> y comprueba con <code>docker exec jenkins docker --version</code>."],
         ["Falla el deploy por credenciales", "Los IDs deben ser exactamente <code>taskmanager-secret-key</code>, <code>taskmanager-admin-pw</code> y <code>taskmanager-user-pw</code>, tipo Secret text."],
         ["Cambié las contraseñas y la app segura pide las antiguas", "La base vive en el volumen <code>taskmanager-data</code> y los usuarios existentes no se actualizan. Ejecuta <code>docker volume rm taskmanager-data</code> y vuelve a desplegar."],
         ["Trivy tarda mucho la primera vez", "Descarga su base de datos. Se guarda en el volumen <code>trivy-cache</code>; las siguientes ejecuciones son rápidas."],

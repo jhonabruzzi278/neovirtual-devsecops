@@ -10,6 +10,7 @@ neovirtual-devsecops/
 ├── docs/
 │   ├── auditoria-trazabilidad.md    # hallazgos de la auditoría -> control -> evidencia
 │   └── demo-ataques.md              # guion para mostrar los ataques en vivo
+├── infra/                           # Jenkins listo para el laboratorio (con CLI de Docker)
 ├── .github/dependabot.yml           # actualización automática de dependencias
 ├── docker-compose.yml               # levanta ambas apps para comparar
 └── SECURITY.md
@@ -64,7 +65,26 @@ pytest --cov=app --cov=create_db --cov-fail-under=80
 
 ## Pipelines en Jenkins
 
-Requiere el Jenkins del proyecto `hello-cicd` (contenedor llamado `jenkins`, con Docker del host montado). Los jobs son de tipo **Pipeline script from SCM** apuntando a este repo, rama `main`, y cambian solo el *Script Path*:
+El repositorio incluye un Jenkins listo para el laboratorio (`infra/`): imagen oficial con el CLI de Docker y el socket del equipo montado. Debe llamarse `jenkins`, porque el pipeline seguro usa `--volumes-from jenkins`.
+
+```bash
+docker compose -f infra/docker-compose.jenkins.yml up -d --build
+docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
+```
+
+Abre http://localhost:8080, pega la clave e instala los plugins sugeridos.
+
+> Si ya tienes otro Jenkins, necesita el CLI de Docker (paquete `docker-cli`; en Debian 13 el paquete `docker.io` no lo trae) y el socket montado. Compruébalo con `docker exec jenkins docker --version`.
+
+Jenkins clona desde una URL y no ve tu carpeta local, así que primero inicializa el repo y súbelo a tu propio remoto (GitHub, GitLab…):
+
+```bash
+git init -b main && git add -A && git commit -m "Proyecto inicial"
+git remote add origin <URL-DE-TU-REPOSITORIO>
+git push -u origin main
+```
+
+Los jobs son de tipo **Pipeline script from SCM** apuntando a tu repositorio, rama `main`, y cambian solo el *Script Path*:
 
 | Job | Script Path |
 |---|---|

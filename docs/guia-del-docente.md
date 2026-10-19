@@ -32,11 +32,12 @@ neovirtual-devsecops/
 │   ├── demo-ataques.md              guion de ataques contra las apps reales
 │   ├── auditoria-trazabilidad.md    hallazgo → control → evidencia
 │   └── guia-del-docente.md          este documento
+├── infra/                           Jenkins listo para el laboratorio
 ├── docker-compose.yml               levanta ambas apps sin Jenkins
 └── README.md
 ```
 
-Repositorio: https://github.com/jhonabruzzi278/neovirtual-devsecops
+El proyecto se entrega sin historial de Git. Inicialízalo (`git init -b main`, `git add -A`, `git commit`) y súbelo a tu propio remoto antes de crear los jobs.
 
 ## 3. Requisitos
 
@@ -44,12 +45,18 @@ Repositorio: https://github.com/jhonabruzzi278/neovirtual-devsecops
 |---|---|
 | Docker (Desktop en Windows/Mac) | Todo corre en contenedores; no hace falta Python en tu equipo |
 | Jenkins en un contenedor llamado **`jenkins`** con el socket de Docker montado | Ejecutar los dos pipelines |
-| Cuenta de GitHub (opcional) | Solo si quieres hacer un fork para que los estudiantes hagan push |
+| Un repositorio Git remoto propio (GitHub, GitLab…) | Jenkins corre en un contenedor y clona desde una URL; no ve tu carpeta local |
 | Navegador | Abrir `docs/clase-interactiva.html` |
 
 El nombre `jenkins` del contenedor es obligatorio: el pipeline seguro usa `--volumes-from jenkins` para que las herramientas vean el código. Si tu contenedor se llama distinto, cambia `JENKINS_CONTAINER` en `apps/taskmanager-con-devsecops/Jenkinsfile`.
 
-Jenkins de referencia (proyecto `hello-cicd`): imagen `jenkins/jenkins:lts-jdk17` con `docker.io` instalado, usuario root, socket `/var/run/docker.sock` montado y puertos 8080 y 50000.
+Jenkins incluido en el repositorio: `infra/docker-compose.jenkins.yml` construye `infra/jenkins/Dockerfile` (imagen `jenkins/jenkins:lts-jdk17` más el paquete `docker-cli`), con usuario root, socket `/var/run/docker.sock` montado y puertos 8080 y 50000.
+
+```bash
+docker compose -f infra/docker-compose.jenkins.yml up -d --build
+```
+
+Si usas otro Jenkins, compruébalo con `docker exec jenkins docker --version`. En Debian 13 el paquete `docker.io` instala el motor pero **no** el comando `docker`; hace falta `docker-cli`.
 
 ## 4. Las dos aplicaciones
 
@@ -169,7 +176,7 @@ Las piezas del pipeline las probé una por una en Docker, pero **no ejecuté el 
 |---|---|
 | `port is already allocated` en 5001 o 5002 | Tienes `docker compose up` activo y el pipeline intenta usar los mismos puertos. Ejecuta `docker compose down` en la raíz del repo antes de los jobs. |
 | La etapa Secretos o SAST falla con «no such container: jenkins» o no encuentra archivos | El contenedor de Jenkins no se llama `jenkins`. Renómbralo o cambia `JENKINS_CONTAINER`. |
-| `docker: command not found` dentro de Jenkins | La imagen de Jenkins no tiene el CLI de Docker o no monta `/var/run/docker.sock`. |
+| `docker: command not found` dentro de Jenkins | La imagen no tiene el CLI de Docker o no monta `/var/run/docker.sock`. En Debian 13 el paquete `docker.io` no trae el comando `docker`; hace falta `docker-cli`. Usa `infra/docker-compose.jenkins.yml` y comprueba con `docker exec jenkins docker --version`. |
 | Falla el deploy por credenciales | Los IDs deben ser exactamente `taskmanager-secret-key`, `taskmanager-admin-pw` y `taskmanager-user-pw`, tipo *Secret text*. |
 | Cambié las contraseñas y la app segura sigue pidiendo las antiguas | La base vive en el volumen `taskmanager-data` y los usuarios existentes no se actualizan. Reinicia con `docker volume rm taskmanager-data` y vuelve a desplegar. |
 | La etapa Trivy tarda mucho la primera vez | Descarga su base de datos. Se guarda en el volumen `trivy-cache`; las siguientes ejecuciones son rápidas. |
